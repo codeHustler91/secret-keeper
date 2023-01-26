@@ -1,10 +1,14 @@
 import './App.css';
+import Header from './components/header/header';
+import SocialPanel from './components/social-panel/SocialPanel';
+import UserSecrets from './components/user-secrets/UserSecrets';
 
 function App() {
   return (
     <div className="App">
-      <h1>Secret Keeper 5000!</h1>
-      <textarea rows="3" cols="50" placeholder="Your Secret Here"></textarea>
+      <Header />
+      <UserSecrets />
+      <SocialPanel />
     </div>
   );
 }
