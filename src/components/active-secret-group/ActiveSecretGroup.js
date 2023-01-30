@@ -9,25 +9,31 @@ export default class ActiveSecretGroup extends React.Component {
       note: ""
     }
   }
-  // componentDidMount() {
-  //   this.setState({
-  //     // secrets: [
-
-  //     // ]
-  //   });
-  // }
+  // convert to functional component?
 
   render() {
     let secrets;
     if (this.props.activeSecrets) {
-      secrets = this.props.activeSecrets.map((secret, idx) => <li key={idx}>{secret}</li>);
+      secrets = this.props.activeSecrets.map((secret, idx) => {
+        return (
+          <input type="text" key={idx} name={idx}
+            placeholder="type something..."
+            value={secret}
+            onChange={this.props.handleChange} />
+        );
+      });
     }
+
     return (
       <div className="active-secret-group">
-        <h3>{this.props.activeGroup}</h3>
-        <ul>
+        <div className='group-title'>
+          <h3>{this.props.activeGroup}</h3>
+          <button>Edit</button>
+          <button>Delete Group</button>
+        </div>
+        <div className='secret-list'>
           {secrets}
-        </ul>
+        </div>
       </div>
     );
   }

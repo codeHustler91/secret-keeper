@@ -40,19 +40,43 @@ export default class UserSecrets extends React.Component {
     });
   }
 
+  handleChange = (e) => {
+    const userSecretsCopy = structuredClone(this.state.userSecrets);
+    const name = e.target.name;
+    userSecretsCopy[this.state.activeGroup][name] = e.target.value;
+    this.setState({
+      userSecrets: userSecretsCopy
+    });
+  }
+  makeGroupActive(group) {
+    this.setState({
+      activeGroup: group
+    });
+  }
+
   render() {
     const groups = Object.keys(this.state.userSecrets)
-      .map((secretGroup, idx) => <li key={idx}>{secretGroup}</li>);
+      .map((secretGroup, idx) => {
+        let styles = "secret-group-li";
+        if (secretGroup === this.state.activeGroup) {
+          styles += " active";
+        }
+        return <li key={idx} className={styles}
+            onClick={() => this.makeGroupActive(secretGroup)}>
+            {secretGroup}
+          </li>
+      });
 
     return (
       <div className="user-secrets">
         <div className="secret-groups-list">
           <h3>Secret Groups</h3>
-          <ul>
+          <ul className='secret-groups-ul'>
             {groups}
           </ul>
         </div>
-        <ActiveSecretGroup 
+        <ActiveSecretGroup
+          handleChange={this.handleChange}
           activeSecrets={this.state.userSecrets[this.state.activeGroup]}
           activeGroup={this.state.activeGroup} />
       </div>
