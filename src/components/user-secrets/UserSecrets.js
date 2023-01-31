@@ -54,7 +54,7 @@ export default class UserSecrets extends React.Component {
     });
   }
   handleSecretClick = (e) => {
-    const idx = e.target.name;
+    const idx = parseInt(e.target.name);
     this.setState({activeSecretIdx: idx});
   }
   makeGroupActive(group) {
